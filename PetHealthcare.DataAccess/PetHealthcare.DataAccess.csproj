@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PetHealthcare.Domain\PetHealthcare.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Temp\" />
+  </ItemGroup>
+
 </Project>

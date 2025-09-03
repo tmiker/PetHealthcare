@@ -1,3 +1,5 @@
+using PetHealthcare.API.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,7 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-
+// CONFIGURATION EXTENSION REGISTRATIONS
+builder.Services.RegisterAutomapperServices();
 
 var app = builder.Build();
 
