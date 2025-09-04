@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{02EA681E
 		api_notes.txt = api_notes.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHealthcare.MVC", "PetHealthcare.MVC\PetHealthcare.MVC.csproj", "{1A6D7091-9B1F-491B-9057-FD21CB5C148B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{81A102E9-AE6E-4597-968D-E6E6BB0AB11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A102E9-AE6E-4597-968D-E6E6BB0AB11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A102E9-AE6E-4597-968D-E6E6BB0AB11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A6D7091-9B1F-491B-9057-FD21CB5C148B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A6D7091-9B1F-491B-9057-FD21CB5C148B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A6D7091-9B1F-491B-9057-FD21CB5C148B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A6D7091-9B1F-491B-9057-FD21CB5C148B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
