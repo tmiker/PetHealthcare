@@ -46,6 +46,8 @@ namespace PetHealthcare.API.CompositionRoot
 
             services.AddScoped<IDeleteAccountService, DeleteAccountService>();
 
+            services.AddScoped<IAdminUserService, AdminUserService>();
+
             return services;
         }
     }
