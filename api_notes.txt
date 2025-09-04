@@ -1,0 +1,13 @@
+Open API Spec URL:  https://localhost:7068/openapi/v1.json
+
+Add Scalar:  
+	dotnet add package Scalar.AspNetCore
+	app.MapScalarApiReference();
+
+Scalar URL:  https://localhost:7068/scalar/v1
+
+Info sources:
+	https://blog.scalar.com/p/how-net-9-and-scalar-solve-the-problem
+
+
+

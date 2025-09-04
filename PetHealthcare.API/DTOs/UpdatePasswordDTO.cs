@@ -4,12 +4,16 @@ namespace PetHealthcare.API.DTOs
 {
     public class UpdatePasswordDTO
     {
-        public string? Email { get; set; }
+        [Required]
+        public string? Email { get; set; } = default!;
+        [Required]
         [DataType(DataType.Password)]
-        public string? OldPassword { get; set; }
+        public string? OldPassword { get; set; } = default!;
+        [Required]
         [DataType(DataType.Password)]
-        public string? NewPassword { get; set; }
+        public string? NewPassword { get; set; } = default!;
+        [Required]
         [DataType(DataType.Password)]
-        public string? ConfirmNewPassword { get; set; }
+        public string? ConfirmNewPassword { get; set; } = default!;
     }
 }

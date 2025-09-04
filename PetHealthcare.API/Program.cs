@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PetHealthcare.API.CompositionRoot;
 using PetHealthcare.DataAccess.Data;
 using PetHealthcare.Domain.Models;
+using Scalar.AspNetCore;
 
 internal class Program
 {
@@ -42,6 +43,7 @@ internal class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         app.UseHttpsRedirection();
