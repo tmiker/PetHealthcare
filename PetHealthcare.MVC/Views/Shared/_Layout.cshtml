@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <img src="~/dogicon3.png" height="40" />
-                <a class="navbar-brand text-info" href="~/Customer/Home"> &nbsp;&nbsp;  Pet Health</a>
+                <a class="navbar-brand text-info" href="~/PetHealth/Home"> &nbsp;&nbsp;  Pet Health</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,7 +33,7 @@
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Users</a>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CarouselImage" asp-action="Index">Carousel Images</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CarouselImages" asp-action="Index">Carousel Images</a>
                                 </div>
                             </li>
                             
@@ -67,12 +67,17 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Register">Register</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                         }
+
+                        @* TEMP ONLY *@
+                        <li class="nav-item">
+                            <a class="nav-link text-info" asp-area="PetHealth" asp-controller="Account" asp-action="Index">Account</a>
+                        </li>
                     </ul>
                     @*<form class="d-flex" data-dashlane-rid="00cfb137ea84e963" data-form-type="">
                         <input class="form-control me-sm-2 bg-light " type="text" placeholder="Search" data-dashlane-rid="e4c1351789433fe2" data-form-type="">

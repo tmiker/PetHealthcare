@@ -1,5 +1,6 @@
 using PetHealthcare.MVC.Abstractions;
 using PetHealthcare.MVC.HttpProviders;
+using PetHealthcare.MVC.Services;
 using PetHealthcare.MVC.Utility;
 using System.Net.Http.Headers;
 
@@ -17,6 +18,12 @@ builder.Services.AddHttpClient(name: StaticDetails.PetHealthcareApi_ClientName, 
 builder.Services.AddSingleton<IAuthenticationHttpProvider, AuthenticationHttpProvider>();
 builder.Services.AddSingleton<IAdminUsersHttpProvider, AdminUsersHttpProvider>();
 builder.Services.AddSingleton<ICarouselImagesHttpProvider, CarouselImagesHttpProvider>();
+
+builder.Services.AddScoped<IClaimsDecoder, ClaimsDecoder>();
+builder.Services.AddScoped<ITokenStatusDecoder, TokenStatusDecoder>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddControllersWithViews();
 
@@ -39,7 +46,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
+    pattern: "{area=Landing}/{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

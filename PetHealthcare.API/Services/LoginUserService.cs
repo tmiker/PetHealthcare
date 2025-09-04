@@ -19,6 +19,7 @@ namespace PetHealthcare.API.Services
         public async Task<(bool IsSuccess, LoginResponseDTO? ResponseDTO, List<string>? ErrorMessages)> LoginUserAsync(LoginUserDTO loginUserDTO)
         {
             ApplicationUser? user = await _userManager.FindByEmailAsync(loginUserDTO.Email);
+            if (user is null) return (false, null, new List<string> { $"A user was not found." });
 
             LoginResponseDTO responseDTO = new LoginResponseDTO()
             {

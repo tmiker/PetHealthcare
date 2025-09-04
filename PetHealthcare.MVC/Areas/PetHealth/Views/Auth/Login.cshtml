@@ -1,0 +1,96 @@
+﻿@model PetHealthcare.MVC.ViewModels.Auth.LoginUserViewModel
+
+@{
+    ViewData["Title"] = $"Login";
+}
+<br/>
+<div class="card border-primary text-center text-light pt-2 " style="height:80%;">
+    <div class="card-header border-primary bg-dark">
+        <div class="row">
+            <div class="col-12">
+                <h4><b>LOGIN</b></h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (TempData["alertSuccess"] != null)
+        {
+            <h3 hidden id="statusSuccess" class="text-success px-4">@TempData["alertSuccess"]</h3>
+        }
+        @if (TempData["alertError"] != null)
+        {
+            <h3 hidden id="statusError" class="text-danger px-4">@TempData["alertError"]</h3>
+        }
+    </div>
+    <br/>
+    <div class="card-body" style="height:100%;">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.LoginDTO!.Email"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.LoginDTO!.Email" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.LoginDTO!.Password"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.LoginDTO!.Password" />
+                </div>
+            </div>
+            <br />
+            <div class=" form-group row">
+                <div class="col-1 offset-5 ">
+                    <label asp-for="@Model.LoginDTO!.RememberMe">
+                        @Html.DisplayNameFor(m => m.LoginDTO!.RememberMe)
+                    </label>
+                </div>
+                <div class="col-1">
+                    <div class="checkbox">
+                        <input class="bg-light" asp-for="@Model.LoginDTO!.RememberMe" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-2 offset-4">
+                    <button type="submit" value="Submit" class="btn btn-success form-control" style="width:180px;" asp-action="Login">Login</button>
+                </div>
+                <div class="col-2 ">
+                    <a class="btn btn-primary form-control" style="width:180px;" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer border-primary bg-dark" style="height:65px">
+        <h6 class="text-success pt-2"><i>&nbsp &nbsp &nbsp Be good to your pets!</i></h6>
+    </div>
+</div>
+
+
+    @section Scripts {
+    <script>
+        <partial name="_ValidationScriptsPartial" />
+    </script>
+    <script>
+
+        $(document).ready(function () {
+
+            if (document.body.contains(document.getElementById("statusSuccess"))) {
+                var toastrMessage = document.getElementById("statusSuccess").childNodes[0].nodeValue;
+                toastr.success(toastrMessage);
+            }
+            if (document.body.contains(document.getElementById("statusError"))) {
+                var toastrMessage = document.getElementById("statusError").childNodes[0].nodeValue;
+                toastr.error(toastrMessage);
+            }
+        });
+
+    </script>
+}

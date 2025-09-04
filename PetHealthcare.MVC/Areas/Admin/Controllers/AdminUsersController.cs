@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetHealthcare.MVC.ViewModels.AdminUsers;
 
 namespace PetHealthcare.MVC.Areas.Admin.Controllers
 {
@@ -7,7 +8,8 @@ namespace PetHealthcare.MVC.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            AdminUsersIndexViewModel model = new AdminUsersIndexViewModel() { WelcomeMessage = "Welcome to Admin Users Index Page!" };
+            return View(model);
         }
     }
 }

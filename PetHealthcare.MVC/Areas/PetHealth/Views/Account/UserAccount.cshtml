@@ -1,0 +1,88 @@
+﻿@model PetHealthcare.MVC.ViewModels.Account.UserAccountViewModel
+
+@{
+    ViewData["Title"] = "Account";
+}
+<br />
+<div class="card border-primary ">
+    <div class="card-header border-primary text-center text-light" style="height:80%;">
+        <div class="row">
+            <div class="col-12">
+                <h3>Account</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (TempData["alertSuccess"] != null)
+        {
+            <h3 hidden id="statusSuccess" class="text-success px-4">@TempData["alertSuccess"]</h3>
+        }
+        @if (TempData["alertError"] != null)
+        {
+            <h3 hidden id="statusError" class="text-danger px-4">@TempData["alertError"]</h3>
+        }
+    </div>
+    <br />
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-2 offset-4 text-light">
+                    <label asp-for="@Model.UserAccountDTO!.UserName"></label>
+                </div>
+                <div class="col-3">
+                    <span class="text-info">@Model.UserAccountDTO!.UserName</span>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-2 offset-4 text-light">
+                    <label asp-for="@Model.UserAccountDTO!.Email"></label>
+                </div>
+                <div class="col-3">
+                    <span class="text-info">@Model.UserAccountDTO!.Email</span>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-4  offset-4">
+                    <a class="btn btn-success form-control" asp-action="UpdatePassword">Update Password</a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4  offset-4">
+                    <a class="btn btn-primary form-control" asp-action="Index">Home</a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4  offset-4">
+                    <a class="btn btn-danger form-control" asp-action="DeleteAccount" asp-route-email="@Model.UserAccountDTO.Email">DeleteAccount</a>
+                </div>
+            </div>
+            <br />
+        </form>
+    </div>
+    <div class="card-footer border-primary text-center">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        <partial name="_ValidationScriptsPartial" />
+    </script>
+    <script>
+        if (document.body.contains(document.getElementById("statusSuccess"))) {
+            var toastrMessage = document.getElementById("statusSuccess").childNodes[0].nodeValue;
+            toastr.success(toastrMessage);
+        }
+        if (document.body.contains(document.getElementById("statusError"))) {
+            var toastrMessage = document.getElementById("statusError").childNodes[0].nodeValue;
+            toastr.error(toastrMessage);
+        }
+    </script>
+}

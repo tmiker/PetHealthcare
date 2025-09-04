@@ -1,5 +1,13 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PetHealthcare.MVC.ViewModels.Account.AccountIndexViewModel
+
 @{
+    ViewData["Title"] = "Account Index";
 }
+
+<div class="text-center">
+    <h3>Account Index</h3>
+</div>
+
+<div class="text-center mt-4">
+    <h4>Welcome Message: @Model.WelcomeMessage</h4>
+</div>

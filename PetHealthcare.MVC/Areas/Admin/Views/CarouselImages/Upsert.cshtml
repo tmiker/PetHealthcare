@@ -1,0 +1,129 @@
+﻿@model PetHealthcare.MVC.ViewModels.CarouselImages.CarouselImageUpsertViewModel
+
+@{
+    @if (Model.CarouselImage!.Id == 0) ViewData["Title"] = "Add Image";
+    else ViewData["Title"] = $"Update Image";
+}
+<br />
+<div class="card border-primary text-center text-light">
+    <div class="card-header border-warning">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.CarouselImage!.Id == 0)
+                {
+                    <h3>Add an Image</h3>
+                }
+                else
+                {
+                    <h3>Update an Image</h3>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-7">
+                    <!-- FIRST COLUMN DATA -->
+                    <br/>
+                    <div hidden class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.CarouselImage.Id"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" asp-for="@Model.CarouselImage.Id" />
+                        </div>
+                    </div>
+                    <div hidden class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.CarouselImage.ImageFileName"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" asp-for="@Model.CarouselImage.ImageFileName" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.CarouselImage.Subject"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.CarouselImage.Subject" />
+                        </div>
+                        <span asp-validation-for="@Model.CarouselImage.Subject" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.CarouselImage.Caption"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.CarouselImage.Caption" />
+                        </div>
+                        <span asp-validation-for="@Model.CarouselImage.Caption" class="text-danger"></span>
+                    </div>
+                   
+                    <br />
+                    <div class="form-group row">
+
+                        <div class="col-3 offset-4 ">
+                            <a class="btn btn-primary form-control"  asp-action="Index">Back to List</a>
+                        </div>
+                        <div class="col-3 ">
+                            <button type="submit" value="Submit" class="btn btn-success form-control" >Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <!-- SECOND COLUMN IMAGE -->
+                    <br/>
+                    <div class="row">
+                        <div class="col-12">
+                        @if(Model.CarouselImage.Id != 0)
+                        {
+                                <p class="text-warning">@Model.CarouselImage.Subject's Current image</p>
+                        }
+                        else
+                            {
+                                <p class="text-warning">Select an image</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (Model.CarouselImage.ImageURL != null)
+                            {
+                                <img src="@Model.CarouselImage.ImageURL" height="220" />
+                            }
+                            else
+                            {
+                                <img src="~/images/pets/default.png" height="220" />
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <!--  UPLOAD IMAGE AS BYTE HERE  -->
+                            <input type="file" name="imageFile" id="carouselImage" class="form-control" />
+                        </div>
+                        <br />
+                        <p></p>
+                        <span class="text-light text-center">( optimal image aspect ratio 2:1, 1200 x 600 pixels )</span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <br/>
+    </div>
+    <div class="card-footer border-warning">
+        <h6 class="text-success">Be good to your pets!</h6>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

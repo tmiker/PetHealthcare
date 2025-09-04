@@ -1,0 +1,69 @@
+﻿@model PetHealthcare.MVC.ViewModels.Auth.RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<br/>
+<div class="card border-primary text-center text-light pt-2" style="height:80%;">
+    <div class="card-header border-primary bg-dark">
+        <div class="row">
+            <div class="col-12">
+                <h4><b>REGISTER</b></h4>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="card-body" style="height:100%;">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.RegisterDTO!.Username"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.RegisterDTO!.Username" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.RegisterDTO!.Email"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.RegisterDTO!.Email" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.RegisterDTO!.Password"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.RegisterDTO!.Password" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.RegisterDTO!.ConfirmPassword"></label>
+                </div>
+                <div class="col-4">
+                    <input class="form-control bg-light" asp-for="@Model.RegisterDTO!.ConfirmPassword" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-2 offset-4">
+                    <button type="submit" value="Submit" class="btn btn-success form-control" style="width:180px;" asp-action="Register">Register</button>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-primary form-control" style="width:180px;" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer border-primary bg-dark" style="height:65px">
+        <h6 class="text-success pt-2"><i>&nbsp &nbsp &nbsp Be good to your pets!</i></h6>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

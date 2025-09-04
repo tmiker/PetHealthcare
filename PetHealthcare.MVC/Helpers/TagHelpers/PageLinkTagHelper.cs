@@ -19,28 +19,28 @@ namespace PetHealth.MVC.Helpers.TagHelpers
 
         [ViewContext]                                                                // to gain access in a property 
         [HtmlAttributeNotBound]                                             // means not intended to set by attribute in Html
-        public ViewContext ViewContext { get; set; }              // provides access to HttpContext, HttpRequest, HttpResponse, etc.
+        public ViewContext ViewContext { get; set; } = default!;            // provides access to HttpContext, HttpRequest, HttpResponse, etc.
 
-        public PagingInfo PageModel { get; set; }
-        public string PageAction { get; set; }
+        public PagingInfo PageModel { get; set; } = default!;
+        public string PageAction { get; set; } = default!;
         public bool PageClassesEnabled { get; set; }
-        public string PageClass { get; set; }
-        public string PageClassNormal { get; set; }
-        public string PageClassSelected { get; set; }
+        public string PageClass { get; set; } = default!;
+        public string PageClassNormal { get; set; } = default!;
+        public string PageClassSelected { get; set; } = default!;
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext!);
             TagBuilder result = new TagBuilder("div");
 
-            for (int i = 1; i <= PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel?.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 string url = PageModel.urlParam!.Replace(":", i.ToString());
                 tag.Attributes["href"] = url;
                 if (PageClassesEnabled)
                 {
-                    tag.AddCssClass(PageClass);
+                    tag.AddCssClass(PageClass!);
                     tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 tag.InnerHtml.Append(i.ToString());
