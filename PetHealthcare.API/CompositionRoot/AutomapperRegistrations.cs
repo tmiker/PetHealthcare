@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-using PetHealthcare.API.MapperProfiles;
+﻿using PetHealthcare.API.MapperProfiles;
 
-namespace PetHealthcare.API.Configuration
+namespace PetHealthcare.API.CompositionRoot
 {
     public static class AutomapperRegistrations
     {

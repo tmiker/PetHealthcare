@@ -18,13 +18,13 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Abstractions\" />
     <Folder Include="CustomExceptions\" />
     <Folder Include="Services\" />
     <Folder Include="Temp\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PetHealthcare.DataAccess\PetHealthcare.DataAccess.csproj" />
     <ProjectReference Include="..\PetHealthcare.Domain\PetHealthcare.Domain.csproj" />
   </ItemGroup>
 
