@@ -30,6 +30,7 @@ internal class Program
         // CONFIGURATION EXTENSION REGISTRATIONS
         builder.Services.RegisterAutomapperServices();
         builder.Services.RegisterJwtAuthenticationServices(builder.Configuration);
+        builder.Services.RegisterApplicationServices();
 
 
 
