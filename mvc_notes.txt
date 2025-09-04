@@ -1,0 +1,1 @@
+replaced package System.IdentityModel.Tokens.Jwt with Microsoft.IdentityModel.JsonWebTokens

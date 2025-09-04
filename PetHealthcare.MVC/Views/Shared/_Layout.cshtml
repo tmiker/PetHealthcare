@@ -24,7 +24,7 @@
                     <ul class="navbar-nav me-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="Landing" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         @* @if (User.IsInRole("Admin"))
@@ -36,31 +36,32 @@
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="CarouselImage" asp-action="Index">Carousel Images</a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="ShowUserClaims">Show Claims</a>
-                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="ShowTokenStatus">Show Token Status</a>
-                                </div>
-                            </li>
+                            
                         @* } *@
 
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Pet" asp-action="Index">Pets</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Pet" asp-action="Index">Pets</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Vet" asp-action="Index">Veterinarians</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Vet" asp-action="Index">Veterinarians</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Visit" asp-action="Index">Veterinary Care</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Visit" asp-action="Index">Veterinary Care</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Logout">Logout</a>
+                                <a class="nav-link " asp-area="PetHealth" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-info" asp-area="Customer" asp-controller="Home" asp-action="UserAccount">Account</a>
+                                <a class="nav-link text-info" asp-area="PetHealth" asp-controller="Account" asp-action="UserAccount">Account</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="PetHealth" asp-controller="Auth" asp-action="ShowUserClaims">Show Claims</a>
+                                    <a class="dropdown-item" asp-area="PetHealth" asp-controller="Auth" asp-action="ShowTokenStatus">Show Token Status</a>
+                                </div>
                             </li>
                         }
                         else

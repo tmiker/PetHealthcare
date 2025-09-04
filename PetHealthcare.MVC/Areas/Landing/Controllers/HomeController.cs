@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using PetHealthcare.MVC.Models;
 using System.Diagnostics;
 
-namespace PetHealthcare.MVC.Areas.Customer.Controllers
+namespace PetHealthcare.MVC.Areas.Landing.Controllers
 {
-    [Area("Customer")]
+    [Area("Landing")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
