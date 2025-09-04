@@ -3,15 +3,86 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PetHealthcare.MVC</title>
+    <title>@ViewData["Title"] - Pet Healthcare MVC</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_darkly.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PetHealthcare.MVC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <!-- DARKLY NAV START -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img src="~/dogicon3.png" height="40" />
+                <a class="navbar-brand text-info" href="~/Customer/Home"> &nbsp;&nbsp;  Pet Health</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        @* @if (User.IsInRole("Admin"))
+                        { *@
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Users</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CarouselImage" asp-action="Index">Carousel Images</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authentication</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="ShowUserClaims">Show Claims</a>
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="ShowTokenStatus">Show Token Status</a>
+                                </div>
+                            </li>
+                        @* } *@
+
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Pet" asp-action="Index">Pets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Vet" asp-action="Index">Veterinarians</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Visit" asp-action="Index">Veterinary Care</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-info" asp-area="Customer" asp-controller="Home" asp-action="UserAccount">Account</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+                    @*<form class="d-flex" data-dashlane-rid="00cfb137ea84e963" data-form-type="">
+                        <input class="form-control me-sm-2 bg-light " type="text" placeholder="Search" data-dashlane-rid="e4c1351789433fe2" data-form-type="">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" data-dashlane-rid="40900af2d80e4308" data-form-type="" data-dashlane-label="true">Search</button>
+                    </form>*@
+                </div>
+            </div>
+        </nav>
+
+        <!-- DARKLY NAV END -->
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PetHealthcare.MVC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,7 +100,8 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> *@
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -39,11 +111,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - PetHealthcare.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Pet Healthcare - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
