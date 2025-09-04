@@ -19,12 +19,12 @@ namespace PetHealthcare.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new IdentityUserRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new PetConfiguration());
-            modelBuilder.ApplyConfiguration(new VetConfiguration());
-            modelBuilder.ApplyConfiguration(new VisitConfiguration());
+            // modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            // modelBuilder.ApplyConfiguration(new UserConfiguration());
+            // modelBuilder.ApplyConfiguration(new IdentityUserRoleConfiguration());
+            // modelBuilder.ApplyConfiguration(new PetConfiguration());
+            // modelBuilder.ApplyConfiguration(new VetConfiguration());
+            // modelBuilder.ApplyConfiguration(new VisitConfiguration());
         }
     }
 }
