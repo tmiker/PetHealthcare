@@ -3,6 +3,8 @@ using PetHealthcare.API.Abstractions;
 using PetHealthcare.API.Helpers;
 using PetHealthcare.API.ServiceDecorators;
 using PetHealthcare.API.Services;
+using PetHealthcare.DataAccess.SqlServerRepositories;
+using PetHealthcare.Domain.Abstractions.ISqlServerRepositories;
 using PetHealthcare.Domain.Models;
 
 namespace PetHealthcare.API.CompositionRoot
@@ -11,6 +13,7 @@ namespace PetHealthcare.API.CompositionRoot
     {
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAzureBlobStorageService, AzureBlobStorageService>();
 
             services.AddScoped<RegisterUserService>();
