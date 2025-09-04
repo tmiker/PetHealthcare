@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHealthcare.API.Abstractions;
 using PetHealthcare.API.DTOs;
+using PetHealthcare.API.Services;
 using System.Security.Claims;
 
 namespace PetHealthcare.API.Controllers
@@ -13,12 +14,15 @@ namespace PetHealthcare.API.Controllers
         private readonly IRegisterUserService _registerUserService;
         private readonly ILoginUserService _loginUserService;
         private readonly IUpdatePasswordService _updatePasswordService;
+        private readonly IDeleteAccountService _deleteAccountService;
 
-        public UsersController(IRegisterUserService registerUserService, ILoginUserService loginUserService, IUpdatePasswordService updatePasswordService)
+        public UsersController(IRegisterUserService registerUserService, ILoginUserService loginUserService, 
+            IUpdatePasswordService updatePasswordService, IDeleteAccountService deleteAccountService)
         {
             _registerUserService = registerUserService;
             _loginUserService = loginUserService;
             _updatePasswordService = updatePasswordService;
+            _deleteAccountService = deleteAccountService;
         }
 
         [AllowAnonymous]
@@ -79,6 +83,26 @@ namespace PetHealthcare.API.Controllers
                     return BadRequest(result.ErrorMessages);
                 }
                 else return BadRequest(new List<string> { "Unknown error updating password. Please contact support." });
+            }
+        }
+
+        [Authorize]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountDTO deleteAccountDTO)
+        {
+            var result = await _deleteAccountService.DeleteAccountAsync(deleteAccountDTO);
+            if (result.IsSuccess)
+            {
+                if (result.SuccessMessage != null) return Ok(result.SuccessMessage);
+                else return StatusCode(StatusCodes.Status204NoContent);  // should return a string with entity counts
+            }
+            else
+            {
+                if (result.ErrorMessages != null && result.ErrorMessages.Count > 0)
+                {
+                    return BadRequest(result.ErrorMessages);
+                }
+                else return BadRequest(new List<string> { "Unknown error deleting account. Please contact support." });
             }
         }
     }

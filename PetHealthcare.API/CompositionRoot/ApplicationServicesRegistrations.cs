@@ -48,6 +48,11 @@ namespace PetHealthcare.API.CompositionRoot
 
             services.AddScoped<IAdminUserService, AdminUserService>();
 
+            services.AddScoped<ICarouselImageService, CarouselImageService>();
+            services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IVetService, VetService>();
+            services.AddScoped<IVisitService, VisitService>();
+
             return services;
         }
     }
