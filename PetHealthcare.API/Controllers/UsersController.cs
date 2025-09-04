@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHealthcare.API.Abstractions;
 using PetHealthcare.API.DTOs;
-using PetHealthcare.API.Services;
 using System.Security.Claims;
 
 namespace PetHealthcare.API.Controllers
