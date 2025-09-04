@@ -1,9 +1,14 @@
-﻿namespace PetHealthcare.API.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PetHealthcare.API.DTOs
 {
     public class DeleteAccountDTO
     {
-        public string? Email { get; set; }
-        public string? UserName { get; set; }
-        public string? Password { get; set; }
+        [Required]
+        public string Email { get; set; } = default!;
+        [Required]
+        public string UserName { get; set; } = default!;
+        [Required]
+        public string Password { get; set; } = default!;
     }
 }
