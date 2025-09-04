@@ -1,13 +1,38 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using PetHealthcare.MVC.Abstractions;
 using PetHealthcare.MVC.HttpProviders;
 using PetHealthcare.MVC.Services;
 using PetHealthcare.MVC.Utility;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(90);
+    options.SlidingExpiration = true;
+    options.LoginPath = "/PetHealth/Auth/Login";
+    options.AccessDeniedPath = "/PetHealth/Auth/AccessDenied";
+});
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("IsAdmin", builder => builder.RequireClaim(ClaimTypes.Role, "Admin"));
+    options.AddPolicy("IsAdminOrManager", builder => builder.RequireClaim(ClaimTypes.Role, "Admin", "Manager"));
+    options.AddPolicy("MarlowAndWendyOnly", builder => builder.RequireClaim(ClaimTypes.Name, "marlow", "wendy"));
+});
 
 builder.Services.AddHttpClient(name: StaticDetails.PetHealthcareApi_ClientName, config =>
 {
@@ -25,7 +50,10 @@ builder.Services.AddScoped<ITokenStatusDecoder, TokenStatusDecoder>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 
 var app = builder.Build();
 
@@ -38,8 +66,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
 app.UseRouting();
 
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

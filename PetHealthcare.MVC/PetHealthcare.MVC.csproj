@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Temp\CarouselImage\" />
-    <Folder Include="ViewModels\Home\" />
+    <Folder Include="Temp\" />
   </ItemGroup>
 
 </Project>

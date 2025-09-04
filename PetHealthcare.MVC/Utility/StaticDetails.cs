@@ -4,7 +4,7 @@
     {
         public const string PetHealthcareApi_ClientName = "Pet_Healthcare_Api_Client";
         public const string PetHealthcareApi_BaseUrl = "https://localhost:7068";         // "http s://pethealthapp.azurewebsites.net";   
-        public const string PetHealthcareApi_AuthPath = "/api/auth";
+        public const string PetHealthcareApi_AuthPath = "/api/users";
         public const string PetHealthcareApi_AccountPath = "/api/account";
         public const string PetHealthcareApi_PetPath = "/api/pets";
         public const string PetHealthcareApi_VetPath = "/api/vets";

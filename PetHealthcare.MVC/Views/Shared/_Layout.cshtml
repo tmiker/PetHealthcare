@@ -27,8 +27,8 @@
                             <a class="nav-link " asp-area="Landing" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        @* @if (User.IsInRole("Admin"))
-                        { *@
+                        @if (User.IsInRole("Admin"))
+                        {
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
                                 <div class="dropdown-menu">
@@ -36,8 +36,7 @@
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="CarouselImages" asp-action="Index">Carousel Images</a>
                                 </div>
                             </li>
-                            
-                        @* } *@
+                        }
 
                         @if (User.Identity!.IsAuthenticated)
                         {
@@ -73,40 +72,11 @@
                                 <a class="nav-link " asp-area="PetHealth" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                         }
-
-                        @* TEMP ONLY *@
-                        <li class="nav-item">
-                            <a class="nav-link text-info" asp-area="PetHealth" asp-controller="Account" asp-action="Index">Account</a>
-                        </li>
+                        
                     </ul>
-                    @*<form class="d-flex" data-dashlane-rid="00cfb137ea84e963" data-form-type="">
-                        <input class="form-control me-sm-2 bg-light " type="text" placeholder="Search" data-dashlane-rid="e4c1351789433fe2" data-form-type="">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" data-dashlane-rid="40900af2d80e4308" data-form-type="" data-dashlane-label="true">Search</button>
-                    </form>*@
                 </div>
             </div>
         </nav>
-
-        <!-- DARKLY NAV END -->
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PetHealthcare.MVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> *@
 
     </header>
     <div class="container">

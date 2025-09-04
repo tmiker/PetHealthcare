@@ -1,6 +1,6 @@
 ﻿using PetHealthcare.MVC.DTOs;
 
-namespace PetHealth.MVC.ViewModels.Home
+namespace PetHealthcare.MVC.ViewModels.Home
 {
     public class HomeIndexViewModel
     {

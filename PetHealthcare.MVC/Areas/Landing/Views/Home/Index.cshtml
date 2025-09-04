@@ -1,7 +1,84 @@
-﻿@{
+﻿@using PetHealthcare.MVC.ViewModels.Home
+@model HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Index";
 }
-
+@{
+    int randomImageIndex = Model.CarouselImages!.Count() > 0 ? new Random().Next(0, (Model.CarouselImages!.ToList().Count) - 1) : -1;
+}
+<br />
 <div class="text-center">
     <h3>Landing Home Index</h3>
 </div>
+<div class="row mt-2">
+    @if (TempData["alertSuccess"] != null)
+    {
+        <h3 hidden id="statusSuccess" class="text-success px-4">@TempData["alertSuccess"]</h3>
+    }
+    @if (TempData["alertError"] != null)
+    {
+        <h3 hidden id="statusError" class="text-danger px-4">@TempData["alertError"]</h3>
+    }
+</div>
+
+<div class="card text-center border-primary text-light mt-3" style="height:auto;">
+    <div class="card-header bg-dark text-info pt-3"><h3><i>Manage your pet's health</i></h3></div>
+    <div class="card-body  border-primary" style="height:auto;">
+        @if (Model.CarouselImages!.Count() > 0)
+        {
+            <div class="row ">
+
+                @if (Model.CarouselImages!.ToList()[randomImageIndex].ImageURL != null)
+                {
+                    <div class="col-12 text-center">
+                        <div class="row ">
+                            <div class="col-12">
+                                <img src="@Model.CarouselImages![randomImageIndex].ImageURL" style="width:60%;" />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <p>No Image Available</p>
+                    </div>
+                }
+                <br />
+            </div>
+        }
+        else
+        {
+            <h4 class="card-title">No Images Available</h4>
+            <p class="card-text">There are no Pet Images in the Database for this Page</p>
+        }
+    </div>
+    <div class="card-footer bg-dark" style="height:auto;">
+        @if (Model.CarouselImages!.Count() > 0)
+        {
+            <h4 class="text-warning"><i>@Model.CarouselImages!.ToList()[randomImageIndex].Caption</i></h4>
+        }
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            if (document.body.contains(document.getElementById("statusSuccess"))) {
+                var toastrMessage = document.getElementById("statusSuccess").childNodes[0].nodeValue;
+                toastr.success(toastrMessage);
+            }
+            if (document.body.contains(document.getElementById("statusError"))) {
+                var toastrMessage = document.getElementById("statusError").childNodes[0].nodeValue;
+                toastr.error(toastrMessage);
+            }
+        });
+
+    </script>
+}
+
+

@@ -100,7 +100,6 @@ namespace PetHealthcare.MVC.Areas.PetHealth.Controllers
                 if (nameClaim != null) welcomeName = nameClaim.Value;
                 else welcomeName = viewModel.LoginDTO.Email!;
                 TempData["alertSuccess"] = $"Welcome {welcomeName}!";
-                // return RedirectToAction(nameof(Index));
                 return RedirectToAction(nameof(Index), "Home", new { area = "Landing" });
             }
             return View(viewModel);
@@ -112,7 +111,7 @@ namespace PetHealthcare.MVC.Areas.PetHealth.Controllers
             HttpContext.Session.SetString("JwtToken", "");
             HttpContext.Session.SetString("RefreshToken", "");
             TempData["alertSuccess"] = $"Signout successful!";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), "Home", new { area = "Landing" });
         }
 
         public IActionResult AccessDenied()
@@ -153,7 +152,7 @@ namespace PetHealthcare.MVC.Areas.PetHealth.Controllers
                 await HttpContext.SignOutAsync();
                 HttpContext.Session.SetString("JwtToken", "");
                 HttpContext.Session.SetString("RefreshToken", "");
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(Login), "Home", new { area = "Landing" });
             }
             return View(viewModel);
         }

@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetHealthcare.MVC.Abstractions;
 using PetHealthcare.MVC.Models;
+using PetHealthcare.MVC.ViewModels.Home;
 using System.Diagnostics;
 
 namespace PetHealthcare.MVC.Areas.Landing.Controllers
@@ -7,16 +10,25 @@ namespace PetHealthcare.MVC.Areas.Landing.Controllers
     [Area("Landing")]
     public class HomeController : Controller
     {
+        private readonly ICarouselImagesHttpProvider _carouselImageHttpProvider;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICarouselImagesHttpProvider carouselImageHttpProvider, ILogger<HomeController> logger)
         {
+            _carouselImageHttpProvider = carouselImageHttpProvider;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _carouselImageHttpProvider.GetAllCarouselImagesAsync();
+
+            HomeIndexViewModel viewModel = new HomeIndexViewModel();
+
+            if (result.Images != null) viewModel.CarouselImages = result.Images.ToList()!;
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
