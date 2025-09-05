@@ -1,0 +1,294 @@
+﻿@model PetHealthcare.MVC.ViewModels.Visit.VisitDetailViewModel
+
+@{
+    ViewData["Title"] = $"Visit Detail";
+}
+<br />
+<div class="card border-primary text-center text-light" style="height:80%;">
+    <div class="card-header border-primary">
+        <div class="row">
+            <div class="col-12">
+                <h4>Visit Details</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form enctype="multipart/form-data">
+            <div class="row" hidden>
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.VisitAggregate!.Id"></label>
+                </div>
+                <div class="col-6">
+                    <input class="form-control" asp-for="@Model.VisitAggregate!.Id" />
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- INSIDE FIRST ROW -->
+                <div class="col-2">
+                    <h5 class="text-warning">@Model.VisitAggregate!.PetName</h5>
+                </div>
+                <div class="col-3">
+                    <h5 class="text-warning">@Model.VisitAggregate!.DateOfVisit.ToShortDateString()</h5>
+                </div>
+                <div class="col-3 offset">
+                    <h5 class="text-warning">@Model.VisitAggregate!.Hospital</h5>
+                </div>
+                <div class="col-2 offset-1">
+                    <h5 class="text-warning">Dr.  @Model.VisitAggregate!.Doctor</h5>
+                </div>
+                <!-- INFO ROW 1 START -->
+            </div>
+            <hr />
+            
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <label asp-for="@Model.VisitAggregate!.VisitType"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.VisitAggregate!.VisitType" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row ">
+                        <div class="col-2 offset-2 ">
+                            <label asp-for="@Model.VisitAggregate!.Reason"></label>
+                        </div>
+                        <div class="col-8">
+                            <input inert class="form-control bg-light" asp-for="@Model.VisitAggregate!.Reason" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-2 offset-1">
+                            <label asp-for="@Model.VisitAggregate!.Weight"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.VisitAggregate!.Weight" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW 1 END -->
+            <!-- INFO ROW 2 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.VisitAggregate!.Prescriptions"></label>
+                </div>
+                <div class="col-9">
+                    <input inert class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.VisitAggregate!.Prescriptions" />
+                    <br />
+                </div>
+
+            </div>
+            <!-- INFO ROW 2 END -->
+            <!-- INFO ROW 3 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.VisitAggregate!.Instructions"></label>
+                </div>
+                <div class="col-9">
+                    <input inert class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.VisitAggregate!.Instructions" />
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW 3 END -->
+            <!-- INFO ROW 4 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.VisitAggregate!.Diagnosis"></label>
+                </div>
+                <div class="col-9">
+                    <input inert class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.VisitAggregate!.Diagnosis" />
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW 4 END -->
+            <!-- INFO ROW 5 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.VisitAggregate!.Notes"></label>
+                </div>
+                <div class="col-9">
+                    <input inert class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.VisitAggregate!.Notes" />
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW 5 END -->
+            <!-- SHOTS START -->
+            <hr />
+            <div class="row">
+                <br />
+                <div class="col-2">
+                    <h6 class="text-warning">Shots and Tests</h6>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-12">
+                    <!-- Shot info here -->
+                    <div class="row">
+                        <!-- Shot row 1 -->
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.Heartworm">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.Heartworm)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.Heartworm" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.Rabies">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.Rabies)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.Rabies" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.Da2ppv">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.Da2ppv)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.Da2ppv" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.Leptospirosis">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.Leptospirosis)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.Leptospirosis" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Shot row 2 -->
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.Bordatella">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.Bordatella)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.Bordatella" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.InfluenzaH3N2">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.InfluenzaH3N2)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.InfluenzaH3N2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.InfluenzaH3N8">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.InfluenzaH3N8)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.InfluenzaH3N8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Test -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.VisitAggregate!.FecalTest">
+                                        @Html.DisplayNameFor(m => m.VisitAggregate!.FecalTest)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input inert class="bg-light" asp-for="@Model.VisitAggregate!.FecalTest" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <!-- SHOTS END -->
+            <!-- INFO ROW OTHER TESTS START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.VisitAggregate!.OtherTests"></label>
+                </div>
+                <div class="col-9">
+                    <input inert class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.VisitAggregate!.OtherTests" />
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW OTHER TESTS END -->
+            <!-- END INSIDE MAIN ROW -->
+            <hr />
+            <div class="row">
+                <div class="col-3 offset-5">
+                    <a class="btn btn-primary form-control" style="width:180px;" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+        <br />
+    </div>
+    <div class="card-footer border-primary" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>
+
+
+
+

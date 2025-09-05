@@ -1,0 +1,188 @@
+﻿@model PetHealthcare.MVC.ViewModels.Pet.PetUpsertViewModel
+
+@{
+    @if (Model.Pet!.Id == 0) ViewData["Title"] = "Add Pet";
+    else ViewData["Title"] = $"Update Pet {@Model.Pet.Name}";
+}
+<br />
+<div class="card border-primary text-center text-info" style="height:80%;">
+    <div class="card-header border-primary">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.Pet!.Id == 0)
+                {
+                    <h3>Add a Pet</h3>
+                }
+                else
+                {
+                    <h3>Update Pet</h3>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-7">
+                    <!-- FIRST COLUMN DATA -->
+                    <br/>
+                    <div hidden class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Id"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" asp-for="@Model.Pet.Id" />
+                        </div>
+                    </div>
+                    <div hidden class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.ImageFileName"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" asp-for="@Model.Pet.ImageFileName" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Name"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.Name" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.Name" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Nickname"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.Nickname" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.Nickname" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Gender"></label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control bg-light" asp-for="@Model.Pet.Gender">
+                                <option value="0" disabled="disabled">--Select Gender--</option>
+                                @foreach (var gender in Model.GenderList)
+                                {
+                                    <option value="@gender">@gender</option>
+                                }
+                            </select>
+                        </div>
+                        <span asp-validation-for="@Model.Pet.Gender" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Breed"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.Breed" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.Breed" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.DateOfBirth"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.DateOfBirth" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1">
+                            <label asp-for="@Model.Pet.DateOfAdoption"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.DateOfAdoption" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.DateOfAdoption" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.ChipNumber"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.ChipNumber" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.ChipNumber" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Allergies"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control bg-light" asp-for="@Model.Pet.Allergies" />
+                        </div>
+                        <span asp-validation-for="@Model.Pet.Allergies" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+
+                        <div class="col-3 offset-4 ">
+                            <a class="btn btn-primary form-control"  asp-action="Index">Back to List</a>
+                        </div>
+                        <div class="col-3 ">
+                            <button type="submit" value="Submit" class="btn btn-success form-control" >Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <!-- SECOND COLUMN IMAGE -->
+                    <br/>
+                    <div class="row">
+                        <div class="col-12">
+                        @if(Model.Pet.Id != 0)
+                        {
+                                <p class="text-warning">@Model.Pet.Nickname's Current image</p>
+                        }
+                        else
+                            {
+                                <p class="text-warning">Select an image</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (Model.Pet.ImageURL != null)
+                            {
+                                <img src="@Model.Pet.ImageURL" height="220" />
+                            }
+                            else
+                            {
+                                <img src="~/images/pets/default.png" height="220" />
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <!--  UPLOAD IMAGE AS BYTE HERE  -->
+                            <input type="file" name="imageFile" id="petImage" class="form-control" />
+                        </div>
+                        <br />
+                        <p></p>
+                        <span class="text-light text-center">( optimal image aspect ratio 3:2, 600 x 400 pixels )</span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <br/>
+    </div>
+    <div class="card-footer border-primary" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

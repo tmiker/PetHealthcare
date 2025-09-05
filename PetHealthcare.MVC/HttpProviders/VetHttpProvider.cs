@@ -24,7 +24,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllVets");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -49,7 +49,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetVet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -73,7 +73,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/AddVet");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             request.Content = new StringContent(JsonSerializer.Serialize(vetDTO), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
@@ -94,7 +94,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/EditVet?id={vetDTO.Id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             request.Content = new StringContent(JsonSerializer.Serialize(vetDTO), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
@@ -115,7 +115,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri + $"/DeleteVet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else

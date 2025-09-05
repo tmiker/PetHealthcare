@@ -1,0 +1,176 @@
+﻿@model PetHealthcare.MVC.ViewModels.Pet.HealthSummaryViewModel
+
+@{
+    ViewData["Title"] = $"Health Summary";
+}
+<br />
+<div class="card border-primary text-light" style="height:80%;">
+    <div class="card-header text-center border-primary">
+        <div class="row">
+            <div class="col-12">
+                <h3>Health Summary for @Model.HealthSummaryDTO!.PetName</h3>
+            </div>
+            <br />
+
+        </div>
+    </div>
+    <div class="card-body">
+        <br />
+        <form enctype="multipart/form-data">
+            <div hidden class="row">
+                <div class="col-12 ">
+                    <label>Pet Id</label>
+                </div>
+                <div class="col-6">
+                    <textarea class="form-control  bg-light">@Model.HealthSummaryDTO.PetId</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+
+                    <div class="row py-2">
+                        <div class="col-2 offset-1 ">
+                            <label class="text-warning">Visit Count:</label>
+                        </div>
+                        <div class="col-9">
+                            <span class="text-warning">@Model.HealthSummaryDTO.VisitCount</span>
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-2 offset-1 ">
+                            <label>Pet Name:</label>
+                        </div>
+                        <div class="col-9">
+                            <span class="text-light">@Model.HealthSummaryDTO.PetName</span>
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div class="row">
+                        <div class="col-9 offset-3">
+                            @if (Model.HealthSummaryDTO.ImageURL != null)
+                            {
+                                <img src="@Model.HealthSummaryDTO.ImageURL" width="380" />
+                            }
+                            else
+                            {
+                                <span class="text-warning">No Image</span>
+                            }
+                        </div>
+                    </div>
+                    <br />
+
+                    @*<div class="row py-2">
+                        <div class="col-2 offset-1 ">
+                            <label>Image URL:</label>
+                        </div>
+                        <div class="col-9">
+                            <span class="text-light">@Model.HealthSummaryDTO.ImageURL</span>
+                        </div>
+                    </div>*@
+                    <br />
+                    
+                </div>
+                <!-- COL 2 -->
+                <div class="col-6">
+                    <br />
+                    <div class="row py-2">
+                        <div class="col-4 offset-2 ">
+                            <label>Exam Due</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.NextAnnualExamDueDate!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.NextAnnualExamDueDate</span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row py-2">
+                        <div class="col-4 offset-2">
+                            <h4 class="text-info">Shots Due</h4>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-4 offset-2">
+                            <label>Rabies Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.RabiesDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.RabiesDue</span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-2">
+                            <label>DA2PPV Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.Da2ppvDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.Da2ppvDue</span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-2 ">
+                            <label>Leptospirosis Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.LeptospirosisDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.LeptospirosisDue</span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-2">
+                            <label>Heartworm Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.HeartwormDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.HeartwormDue</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 offset-2">
+                            <label>Bordatella Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.BordatellaDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.BordatellaDue</span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-2 ">
+                            <label>InfluenzaH3N2 Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.InfluenzaH3N2Due!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.InfluenzaH3N2Due</span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-2">
+                            <label>InfluenzaH3N8 Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.InfluenzaH3N8Due!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.InfluenzaH3N8Due</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 offset-2">
+                            <label>Fecal Test Due:</label>
+                        </div>
+                        <div class="col-6">
+                            <span class="@(Model.HealthSummaryDTO.FecalTestDue!.Contains("Overdue") ? "text-danger" : "text-light")">@Model.HealthSummaryDTO.FecalTestDue</span>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row py-2">
+                        <div class="col-4 offset-4">
+                            <a class="btn btn-info form-control" style="width:180px;" asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer border-primary text-center" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>

@@ -98,7 +98,7 @@ namespace PetHealthcare.MVC.Areas.PetHealth.Controllers
                     HttpContext.Session.SetString("RefreshToken", "");
                     TempData["alertSuccess"] = $"Account deletion successful!";
                     if (result.SuccessMessage != null) TempData["alertSuccess"] += $"\n{result.SuccessMessage}";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index), "Home", new { area = "Landing" });
                 }
             }
             else

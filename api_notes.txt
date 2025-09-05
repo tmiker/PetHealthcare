@@ -9,5 +9,22 @@ Scalar URL:  https://localhost:7068/scalar/v1
 Info sources:
 	https://blog.scalar.com/p/how-net-9-and-scalar-solve-the-problem
 
+Azure Blob Storage
+	Check connection string in secrets is correct
+	Storage account: pethealthcareimages			
+		name is part of conn string:  AccountName=pethealthcareimages
 
+	Container Names
+		Pet images:  pet-image-container
+		Carousel Images:  pet-carousel-image-container
+	Blob Naming
+		$"{userId}/{file.FileName}"
+
+Access
+	Go to: pethealthcareimages > Settings > Configuration
+		set Allow Blob anonymous access to Enabled
+	Then:go to:  > Containers
+		foreach container select 'Change access level'
+			selected 'Blob' for anonymous access to individual blob files
+				if select Blob and Container allows anonymous listing of container contents
 

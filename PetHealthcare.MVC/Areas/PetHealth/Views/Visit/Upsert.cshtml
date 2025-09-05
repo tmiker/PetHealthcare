@@ -1,0 +1,365 @@
+﻿@model PetHealthcare.MVC.ViewModels.Visit.VisitUpsertViewModel
+
+@{
+    @if (Model.Visit!.Id == 0) ViewData["Title"] = "Add Visit";
+    else ViewData["Title"] = $"Update Visit";
+}
+<br />
+<div class="card border-primary text-center text-light" style="height:80%;">
+    <div class="card-header border-primary">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.Visit!.Id == 0)
+                {
+                    <h4>Add a Visit</h4>
+                }
+                else
+                {
+                    <h4>Update a Visit</h4>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="row" hidden>
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Visit!.Id"></label>
+                </div>
+                <div class="col-6">
+                    <input class="form-control" asp-for="@Model.Visit!.Id" />
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- INSIDE FIRST ROW -->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <!-- label and select for date -->
+                            <div class="row text-warning">
+                                <div class="col-6">
+                                    <label asp-for="@Model.Visit!.DateOfVisit"></label>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.DateOfVisit" />
+                                </div>
+                                <span class="text-danger" asp-validation-for="@Model.Visit!.DateOfVisit" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <!-- label and select for pet -->
+                            <div class="row text-warning">
+                                <div class="col-3 offset-2">
+                                    <label asp-for="@Model.Visit!.PetId"></label>
+                                </div>
+                                <div class="col-3 offset-1">
+                                    <select class="form-control-sm bg-light" asp-for="@Model.Visit!.PetId">
+                                        <option value="0" disabled="disabled" selected>--Select Pet--</option>
+                                        @foreach (var pet in Model.PetList)
+                                        {
+                                            <option value="@pet.Id">@pet.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <span class="text-danger" asp-validation-for="@Model.Visit!.PetId" />
+                            </div>
+                        </div>
+                        <div class="col-4 text-warning">
+                            <!-- label and select for hospital/doctor -->
+                            <div class="row">
+                                <div class="col-2 offset-1 ">
+                                    <label asp-for="@Model.Visit!.VetId"></label>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-control-sm bg-light" asp-for="@Model.Visit!.VetId">
+                                        <option value="0" disabled="disabled" selected>--Select Vet--</option>
+                                        @foreach (var vet in Model.VetList)
+                                        {
+                                            <option value="@vet.Id">@vet.Doctor / @vet.Hospital </option>
+                                        }
+                                    </select>
+                                </div>
+                                <span class="text-danger" asp-validation-for="@Model.Visit!.VetId" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            <!-- INFO ROW 1 START -->
+            <div class="row">
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <label asp-for="@Model.Visit!.VisitType"></label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.VisitType">
+                                <option value="0" disabled="disabled" selected>--Select Type--</option>
+                                @foreach (var type in Model.VisitTypeList)
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                        </div>
+                        <span class="text-danger" asp-validation-for="@Model.Visit!.VisitType" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-3 offset-2">
+                            <label asp-for="@Model.Visit!.Weight"></label>
+                        </div>
+                        <div class="col-3 offset-1">
+                            <input class="form-control-sm bg-light" asp-for="@Model.Visit!.Weight" />
+                        </div>
+                        <span class="text-danger" asp-validation-for="@Model.Visit!.Weight" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-2 offset-1">
+                            <label asp-for="@Model.Visit!.Reason"></label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.Reason" />
+                        </div>
+                        <span class="text-danger" asp-validation-for="@Model.Visit!.Reason" />
+                    </div>
+                    <br />
+                </div>
+                
+            </div>
+            <!-- INFO ROW 1 END -->
+            <!-- INFO ROW 2 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.Visit!.Prescriptions"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.Prescriptions" />
+                    <br />
+                </div>
+                <span class="text-danger" asp-validation-for="@Model.Visit!.Prescriptions" />
+
+            </div>
+            <!-- INFO ROW 2 END -->
+            <!-- INFO ROW 3 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.Visit!.Instructions"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.Instructions" />
+                    <br />
+                </div>
+                <span class="text-danger" asp-validation-for="@Model.Visit!.Instructions" />
+            </div>
+            <!-- INFO ROW 3 END -->
+            <!-- INFO ROW 4 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.Visit!.Diagnosis"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.Diagnosis" />
+                    <br />
+                </div>
+                <span class="text-danger" asp-validation-for="@Model.Visit!.Diagnosis" />
+            </div>
+            <!-- INFO ROW 4 END -->
+            <!-- INFO ROW 5 START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.Visit!.Notes"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.Notes" />
+                    <br />
+                </div>
+                <span class="text-danger" asp-validation-for="@Model.Visit!.Notes" />
+            </div>
+            <!-- INFO ROW 5 END -->
+            <!-- SHOTS START -->
+            <hr />
+            <div class="row">
+                <br />
+                <div class="col-2">
+                    <h6 class="text-warning">Shots and Tests</h6>
+                </div>
+                
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-12">
+                    <!-- Shot info here -->
+                    <div class="row">
+                        <!-- Shot row 1 -->
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.Heartworm">
+                                        @Html.DisplayNameFor(m => m.Visit!.Heartworm)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.Heartworm" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.Rabies">
+                                        @Html.DisplayNameFor(m => m.Visit!.Rabies)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.Rabies" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.Da2ppv">
+                                        @Html.DisplayNameFor(m => m.Visit!.Da2ppv)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.Da2ppv" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.Leptospirosis">
+                                        @Html.DisplayNameFor(m => m.Visit!.Leptospirosis)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.Leptospirosis" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <!-- Shot row 2 -->
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.Bordatella">
+                                        @Html.DisplayNameFor(m => m.Visit!.Bordatella)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.Bordatella" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.InfluenzaH3N2">
+                                        @Html.DisplayNameFor(m => m.Visit!.InfluenzaH3N2)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.InfluenzaH3N2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Shot -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.InfluenzaH3N8">
+                                        @Html.DisplayNameFor(m => m.Visit!.InfluenzaH3N8)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.InfluenzaH3N8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Test -->
+                            <div class=" form-group row">
+                                <div class="col-6 ">
+                                    <label asp-for="@Model.Visit!.FecalTest">
+                                        @Html.DisplayNameFor(m => m.Visit!.FecalTest)
+                                    </label>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox">
+                                        <input class="bg-light" asp-for="@Model.Visit!.FecalTest" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <!-- SHOTS END -->
+            <!-- INFO ROW OTHER TESTS START -->
+            <div class="row">
+                <div class="col-2 ">
+                    <label asp-for="@Model.Visit!.OtherTests"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control-sm bg-light" style="width:100%;" asp-for="@Model.Visit!.OtherTests" />
+                    <br />
+                </div>
+            </div>
+            <!-- INFO ROW OTHER TESTS END -->
+            <!-- END INSIDE MAIN ROW -->
+            <hr />
+            <br />
+            <div class="row">
+                <div class="col-3 offset-3">
+                    <button type="submit" value="Submit" class="btn btn-success form-control" style="width:180px;">Submit</button>
+                </div>
+                <div class="col-3 ">
+                    <a class="btn btn-primary form-control" style="width:180px;" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer border-primary" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

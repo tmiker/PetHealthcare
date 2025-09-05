@@ -1,0 +1,44 @@
+﻿@model PetHealthcare.MVC.ViewModels.Pet.PetDeleteViewModel
+@{
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<form asp-area="PetHealth" asp-controller="Pet" asp-action="Delete" asp-route-id="@Model.Pet!.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="container text-light" style="width:100%">
+        <div class="col-12">
+            <h6 class="text-danger">Are you sure you want to delete this pet? </h6>
+            <h6 class="text-danger">All of the pet's visits will also be deleted. </h6>
+            <hr />
+            <input type="hidden" asp-for="@Model.Pet!.Id" />
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Name</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.Pet!.Name" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Breed</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.Pet!.Breed" class="form-control" />
+                </div>
+            </div>
+            <hr />
+            <div class="form-group row">
+                <div class="col-6 text-center">
+                    <button type="submit" class="btn btn-outline-danger form-conrol" style="width:140px;">Delete</button>
+                </div>
+                <div class="col-6 text-center">
+                    @*<button type="button" id="buttonModalContentCancel" onclick="cancelModalFromContent" class="btn btn-secondary form-conrol" style="width:140px;">Cancel</button>*@
+                    <button type="button" id="buttonModalContentCancel" onclick="$('#petDeleteConfirmModal').modal('hide');" class="btn btn-outline-info form-conrol" style="width:140px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

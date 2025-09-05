@@ -22,7 +22,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllCarouselImages");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -47,7 +47,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetCarouselImage?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -71,7 +71,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/AddCarouselImage");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             //request.Content = new StringContent(JsonSerializer.Serialize(imageDTO), Encoding.UTF8, "application/json");
             using (var content = new MultipartFormDataContent())
             {
@@ -125,7 +125,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/EditCarouselImage?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
 
             using (var content = new MultipartFormDataContent())
             {
@@ -178,7 +178,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri + $"/DeleteCarouselImage?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else

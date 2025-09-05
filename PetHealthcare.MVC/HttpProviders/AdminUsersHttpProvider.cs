@@ -21,7 +21,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllUsers");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -45,7 +45,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/LockUser?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else
@@ -65,7 +65,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/UnlockUser?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else
@@ -85,7 +85,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/FlipUserAdminRole?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -110,7 +110,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/FlipUserManagerRole?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -135,7 +135,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/FlipUserEmployeeRole?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -160,7 +160,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/FlipUserCustomerRole?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -185,7 +185,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/IsUserLocked?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -210,7 +210,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/IsUserUnlocked?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {

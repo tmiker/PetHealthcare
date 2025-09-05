@@ -22,7 +22,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllPets");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -47,7 +47,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetPet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -71,7 +71,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/AddPet");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             //request.Content = new StringContent(JsonSerializer.Serialize(petDTO), Encoding.UTF8, "application/json");
             using (var content = new MultipartFormDataContent())
             {
@@ -130,7 +130,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/EditPet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
 
             using (var content = new MultipartFormDataContent())
             {
@@ -190,7 +190,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri + $"/DeletePet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else

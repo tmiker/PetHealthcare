@@ -1,0 +1,102 @@
+﻿@model PetHealthcare.MVC.ViewModels.Vet.VetDetailViewModel
+
+@{
+    ViewData["Title"] = $"Vet Detail";
+}
+<br />
+<div class="card border-primary text-center text-info" style="height:80%;">
+    <div class="card-header border-primary">
+        <div class="row">
+            <div class="col-12">
+                <h3>Details for @Model.Vet!.Doctor</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form enctype="multipart/form-data">
+            <div hidden class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Id"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control" asp-for="@Model.Vet!.Id" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Doctor"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.Doctor" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Hospital"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.Hospital" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Phone"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.Phone" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Street1"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.Street1" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.Street2"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.Street2" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.City"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.City" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.State"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.State" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 offset-2 ">
+                    <label asp-for="@Model.Vet!.ZipCode"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control bg-light" asp-for="@Model.Vet!.ZipCode" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4 offset-5">
+                    <a class="btn btn-primary form-control" style="width:180px;" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer border-primary" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>

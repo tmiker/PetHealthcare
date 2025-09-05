@@ -1,0 +1,45 @@
+﻿@*@model PetHealthcare.MVC.ViewModels.Home.AccountDeleteViewModel*@
+@{
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<form asp-area="PetHealth" asp-controller="Account" asp-action="DeleteAccount" asp-route-email="@Model.DeleteAccountDTO!.Email" method="post">
+    @Html.AntiForgeryToken()
+    <div class="container text-light" style="width:100%">
+        <div class="col-12">
+            <h4 class="text-danger">WARNING!</h4>
+            <h6 class="text-danger">Are you sure you want to delete your account? </h6>
+            <h6 class="text-danger">All of your data will also be deleted. </h6>
+            <hr />
+            @*<input type="hidden" asp-for="@Model.DeleteAccountDTO!.Email" />
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>User Name</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.DeleteAccountDTO!.UserName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Email</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.DeleteAccountDTO!.Email" class="form-control" />
+                </div>
+            </div>*@
+            <hr />
+            <div class="form-group row">
+                <div class="col-6 text-center">
+                    <button type="submit" class="btn btn-outline-danger form-conrol" style="width:140px;">Delete</button>
+                </div>
+                <div class="col-6 text-center">
+                    @*<button type="button" id="buttonModalContentCancel" onclick="cancelModalFromContent" class="btn btn-secondary form-conrol" style="width:140px;">Cancel</button>*@
+                    <button type="button" id="buttonModalContentCancel" onclick="$('#accountDeleteConfirmModal').modal('hide');" class="btn btn-outline-info form-conrol" style="width:140px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

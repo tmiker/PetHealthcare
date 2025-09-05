@@ -24,7 +24,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllVisits");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -49,7 +49,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + "/GetAllVisitAggregates");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -73,7 +73,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetAllVisitAggregatesByPet?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -97,7 +97,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetVisit?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -122,7 +122,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri + $"/GetVisitAggregate?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -146,7 +146,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/AddVisit");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             request.Content = new StringContent(JsonSerializer.Serialize(visitDTO), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
@@ -167,7 +167,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri + $"/EditVisit?id={visitDTO.Id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
             request.Content = new StringContent(JsonSerializer.Serialize(visitDTO), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
@@ -188,7 +188,7 @@ namespace PetHealthcare.MVC.HttpProviders
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri + $"/DeleteVisit?id={id}");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uri);
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode) return (true, null);
             else

@@ -1,29 +1,20 @@
-﻿@model CarouselImageIndexViewModel
+﻿@model PetHealthcare.MVC.ViewModels.Vet.VetIndexViewModel
 @using PetHealthcare.MVC.Paging
-@using PetHealthcare.MVC.ViewModels.CarouselImages
 @{
-    ViewData["Title"] = "Carousel Images";
+    ViewData["Title"] = "Veterinarians";
 }
 <br />
-<div class="card border-primary ">
-    <div class="card-header text-center">
-        @if (!string.IsNullOrWhiteSpace(Model.Message))
-        {
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="text-danger">@Model.Message</h3>
-                </div>
-            </div>
-        }
+<div class="card border-primary text-info" style="height:80%;">
+    <div class="card-header text-center border-primary">
         <div class="row">
             <div class="col-8 offset-2">
-                <h3 class="text-light">Carousel Images</h3>
+                <h3 class="text-light">Veterinarians</h3>
             </div>
             <div class="col-2">
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <div class="row mx-1" style="padding-top:10px">
-                    <a class="btn btn-outline-success form-control" asp-area="Admin" asp-controller="CarouselImages" asp-action="Upsert" >Add New Image</a>
+                    <a class="btn btn-outline-success" asp-area="Customer" asp-controller="Vet" asp-action="Upsert" >Add New Vet</a>
                     </div>
                 }
             </div>
@@ -43,17 +34,18 @@
         <div class="row ">
             <div class="col-10">
                 <div class="row" style="padding-top:10px">
-                    <div class="col-4 px-3">
-                            @Html.Editor("searchSubject", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Subject..." } })
+                    <div class="col-4 ">
+                        @Html.Editor("searchHospital", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Hospital..." } })
                     </div>
                     <div class="col-4">
-                            @Html.Editor("searchCaption", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Caption..." } })
+                            @Html.Editor("searchDoctor", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Doctor..." } })
                     </div>
                     <div class="col-4">
-                            @Html.Editor("searchImageURL", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Image URL..." } })
+                            @Html.Editor("searchState", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "State..." } })
                     </div>
                 </div>
             </div>
+
             <div class="col-2">
                 <div class="row mx-1" style="padding-top:10px">
                     <button type="submit" name="submit" value="Search" class="btn btn-outline-warning form-control">Search</button>
@@ -62,77 +54,84 @@
         </div>
         </form>
         <!-- search -->
+
         <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         </div>
     </div>
     <div class="card-body">
-        @if (Model.CarouselImages.Count > 0)
+        @if (Model.Vets.Any())
         {
-            <table class="table table-bordered text-center">
-                <thead class="bg-primary text-light">
+        <table class="table table-bordered text-center">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Doctor</th>
+                    <th>Hospital</th>
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vet in Model.Vets)
+                {
                     <tr>
-                        <th>Id</th>
-                        <th>Subject</th>
-                        <th>Caption</th>
-                        <th>File Name</th>
+                        <td>@vet.Id</td>
+                        <td>@vet.Doctor</td>
+                        <td>@vet.Hospital</td>
                         @if (User.Identity!.IsAuthenticated)
                         {
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <td>
+                                <a class="btn btn-outline-info" asp-area="Customer" asp-controller="Vet" asp-action="Detail" asp-route-id=@vet.Id style="width:120px;">Detail</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-success" asp-area="Customer" asp-controller="Vet" asp-action="Upsert" asp-route-id=@vet.Id style="width:120px;">Edit</a>
+                            </td>
+                            <td>
+                                @*<a class="btn btn-outline-danger" asp-area="Customer" asp-controller="Vet" asp-action="Delete" asp-route-id=@vet.Id style="width:120px;">Delete</a>*@
+                                <button class="buttonModalDelete btn btn-outline-danger" style="width:120px" data-id="@vet.Id" data-toggle="modal">Delete</button>
+                            </td>
                         }
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var image in Model.CarouselImages)
-                    {
-                        <tr>
-                            <td>@image.Id</td>
-                            <td>@image.Subject</td>
-                            <td>@image.Caption</td>
-                            <td>@image.ImageFileName</td>
-                            @if (User.Identity!.IsAuthenticated)
-                            {
-                                <td>
-                                    <a class="btn btn-outline-info" asp-area="Admin" asp-controller="CarouselImages" asp-action="Detail" asp-route-id=@image.Id style="width:120px;">Detail</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="CarouselImages" asp-action="Upsert" asp-route-id=@image.Id style="width:120px;">Edit</a>
-                                </td>
-                                <td>
-                                    <button class="buttonModalDelete btn btn-outline-danger" style="width:120px" data-id="@image.Id" data-toggle="modal">Delete</button>
-                                </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <div page-model="@Model.PagingInfo!" page-classes-enabled="true" page-class="btn border border-primary"
+                }
+            </tbody>
+        </table>
+        <div page-model="@Model.PagingInfo!" page-classes-enabled="true" page-class="btn border border-primary"
              page-class-normal="btn btn-dark" page-class-selected="btn btn-info active" class="btn-group float-right" style="padding-bottom:16px; width: 30px;">
+        </div>
+        }
+        else
+        {
+            <div class="row" style="padding-top:10px">
+                <div class="col-12 text-center">
+                    <h4>No veterinarians on record.</h4>
+                </div>
             </div>
-            <hr />
         }
     </div>
-    <div class="card-footer text-center">
+    <div class="card-footer text-center border-primary" style="height:65px">
         <div claclass="row">
             <div class="col-12">
-                <h6 class="text-success">Be good to your pets!</h6>
+                <h6 class="text-success pt-2">Be good to your pets!</h6>
             </div>
         </div>
     </div>
 </div>
 <!--  Delete Modal Start -->
-<div class="modal fade" id="imageDeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="vetDeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header ">
+            <div class="modal-header">
                 <h5 class="modal-title text-light">Confirm Delete!</h5>
                 @*<button type="button" class="btn-close btn-danger border" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"></span>
                 </button>*@
             </div>
-            <div class="modal-body justify-content-center " id="imageDeleteModalContent">
+            <div class="modal-body justify-content-center" id="vetDeleteModalContent">
             </div>
             <div class="modal-footer ">
                 @*<button type="button" class="btn btn-info " data-dismiss="modal">CLOSE</button>*@
@@ -146,7 +145,6 @@
     </div>
 </div>
 <!--  Delete Modal End -->
-
 @section Scripts {
     <script>
         <partial name="_ValidationScriptsPartial" />
@@ -154,7 +152,7 @@
     <script>
         $(document).ready(function () {
 
-            var showModalUrl = '/admin/CarouselImages/ShowDeleteConfirmModal/';
+            var showModalUrl = '/petHealth/Vet/ShowDeleteConfirmModal/';
 
             $(".buttonModalDelete").click(function () {
                 var $buttonClicked = $(this);
@@ -168,8 +166,8 @@
                     cache: false,
                     dataType: 'html',
                     success: function (data) {
-                        $('#imageDeleteModalContent').html(data);
-                        $('#imageDeleteConfirmModal').modal('show');
+                        $('#vetDeleteModalContent').html(data);
+                        $('#vetDeleteConfirmModal').modal('show');
                     },
                     error: function () {
                         alert("Error creating modal.");
@@ -186,7 +184,6 @@
                 toastr.error(toastrMessage);
             }
         });
-
     </script>
 }
 

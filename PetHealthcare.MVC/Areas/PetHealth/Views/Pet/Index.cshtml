@@ -1,29 +1,20 @@
-﻿@model CarouselImageIndexViewModel
-@using PetHealthcare.MVC.Paging
-@using PetHealthcare.MVC.ViewModels.CarouselImages
+﻿@model PetHealthcare.MVC.ViewModels.Pet.PetIndexViewModel
+@using PetHealthcare.MVC.Models
 @{
-    ViewData["Title"] = "Carousel Images";
+    ViewData["Title"] = "Pets Home";
 }
 <br />
-<div class="card border-primary ">
-    <div class="card-header text-center">
-        @if (!string.IsNullOrWhiteSpace(Model.Message))
-        {
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="text-danger">@Model.Message</h3>
-                </div>
-            </div>
-        }
+<div class="card border-primary" style="height:80%;">
+    <div class="card-header text-center border-primary">
         <div class="row">
             <div class="col-8 offset-2">
-                <h3 class="text-light">Carousel Images</h3>
+                <h3 class="text-light">Pets</h3>
             </div>
             <div class="col-2">
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <div class="row mx-1" style="padding-top:10px">
-                    <a class="btn btn-outline-success form-control" asp-area="Admin" asp-controller="CarouselImages" asp-action="Upsert" >Add New Image</a>
+                    <a class="btn btn-outline-success form-control" asp-area="Customer" asp-controller="Pet" asp-action="Upsert" >Add New Pet</a>
                     </div>
                 }
             </div>
@@ -44,13 +35,13 @@
             <div class="col-10">
                 <div class="row" style="padding-top:10px">
                     <div class="col-4 px-3">
-                            @Html.Editor("searchSubject", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Subject..." } })
+                            @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Name..." } })
                     </div>
                     <div class="col-4">
-                            @Html.Editor("searchCaption", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Caption..." } })
+                            @Html.Editor("searchBreed", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Breed..." } })
                     </div>
                     <div class="col-4">
-                            @Html.Editor("searchImageURL", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "Image URL..." } })
+                            @Html.Editor("searchChipNumber", new { htmlAttributes = new { @class = "form-control bg-dark text-light", @placeholder = "ChipNumber..." } })
                     </div>
                 </div>
             </div>
@@ -67,17 +58,19 @@
         </div>
     </div>
     <div class="card-body">
-        @if (Model.CarouselImages.Count > 0)
+        @if (Model.Pets.Any())
         {
             <table class="table table-bordered text-center">
                 <thead class="bg-primary text-light">
                     <tr>
-                        <th>Id</th>
-                        <th>Subject</th>
-                        <th>Caption</th>
-                        <th>File Name</th>
+                        <th hidden>Id</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Breed</th>
+
                         @if (User.Identity!.IsAuthenticated)
                         {
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -85,23 +78,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var image in Model.CarouselImages)
+                    @foreach (var pet in Model.Pets)
                     {
                         <tr>
-                            <td>@image.Id</td>
-                            <td>@image.Subject</td>
-                            <td>@image.Caption</td>
-                            <td>@image.ImageFileName</td>
+                            <td hidden>@pet.Id</td>
+                            <td>@pet.Name</td>
+                            <td>@pet.Gender</td>
+                            <td>@pet.Breed</td>
                             @if (User.Identity!.IsAuthenticated)
                             {
                                 <td>
-                                    <a class="btn btn-outline-info" asp-area="Admin" asp-controller="CarouselImages" asp-action="Detail" asp-route-id=@image.Id style="width:120px;">Detail</a>
+                                    <a class="btn btn-outline-info" asp-area="PetHealth" asp-controller="Pet" asp-action="Detail" asp-route-id=@pet.Id style="width:120px;">Detail</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="CarouselImages" asp-action="Upsert" asp-route-id=@image.Id style="width:120px;">Edit</a>
+                                    <a class="btn btn-outline-success" asp-area="PetHealth" asp-controller="Pet" asp-action="Upsert" asp-route-id=@pet.Id style="width:120px;">Edit</a>
                                 </td>
                                 <td>
-                                    <button class="buttonModalDelete btn btn-outline-danger" style="width:120px" data-id="@image.Id" data-toggle="modal">Delete</button>
+                                    <button class="buttonModalDelete btn btn-outline-danger" style="width:120px" data-id="@pet.Id" data-toggle="modal">Delete</button>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-info" asp-area="PetHealth" asp-controller="Pet" asp-action="HealthSummary" asp-route-id=@pet.Id style="width:120px;">Health</a>
                                 </td>
                             }
                         </tr>
@@ -111,19 +107,26 @@
             <div page-model="@Model.PagingInfo!" page-classes-enabled="true" page-class="btn border border-primary"
              page-class-normal="btn btn-dark" page-class-selected="btn btn-info active" class="btn-group float-right" style="padding-bottom:16px; width: 30px;">
             </div>
-            <hr />
+        }
+        else
+        {
+            <div class="row" style="padding-top:10px">
+                <div class="col-12 text-center">
+                    <h4>No pets on record.</h4>
+                </div>
+            </div> 
         }
     </div>
-    <div class="card-footer text-center">
+    <div class="card-footer text-center border-primary" style="height:65px">
         <div claclass="row">
             <div class="col-12">
-                <h6 class="text-success">Be good to your pets!</h6>
+                <h6 class="text-success pt-2">Be good to your pets!</h6>
             </div>
         </div>
     </div>
 </div>
 <!--  Delete Modal Start -->
-<div class="modal fade" id="imageDeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="petDeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header ">
@@ -132,7 +135,7 @@
                 <span aria-hidden="true"></span>
                 </button>*@
             </div>
-            <div class="modal-body justify-content-center " id="imageDeleteModalContent">
+            <div class="modal-body justify-content-center " id="petDeleteModalContent">
             </div>
             <div class="modal-footer ">
                 @*<button type="button" class="btn btn-info " data-dismiss="modal">CLOSE</button>*@
@@ -154,7 +157,7 @@
     <script>
         $(document).ready(function () {
 
-            var showModalUrl = '/admin/CarouselImages/ShowDeleteConfirmModal/';
+            var showModalUrl = '/petHealth/Pet/ShowDeleteConfirmModal/';
 
             $(".buttonModalDelete").click(function () {
                 var $buttonClicked = $(this);
@@ -168,8 +171,8 @@
                     cache: false,
                     dataType: 'html',
                     success: function (data) {
-                        $('#imageDeleteModalContent').html(data);
-                        $('#imageDeleteConfirmModal').modal('show');
+                        $('#petDeleteModalContent').html(data);
+                        $('#petDeleteConfirmModal').modal('show');
                     },
                     error: function () {
                         alert("Error creating modal.");
@@ -187,6 +190,12 @@
             }
         });
 
+                                // Error in Chrome:  That's because Chrome added support for source maps.
+                                // Go to the developer tools(F12 in the browser), then select the three dots in the upper right corner, and go to Settings.
+                                // Then, look for Sources, and disable the options:
+                                // "Enable JavaScript source maps"
+                                // "Enable CSS source maps"
+                                // If you do that, that would get rid of the warnings.It has nothing to do with your code.Check the developer tools in other pages and you will see the same warning.
     </script>
 }
 

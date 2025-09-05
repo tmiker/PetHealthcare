@@ -3,10 +3,160 @@
     ViewData["Title"] = "Admin Users Index";
 }
 
-<div class="text-center">
-    <h3>Admin Users Index</h3>
+<br />
+<div class="card border-primary text-center text-light">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12">
+                <h4>Users</h4>
+            </div>
+        </div>
+        <div class="row">
+            @if (TempData["alertSuccess"] != null)
+            {
+                <h3 hidden id="statusSuccess" class="text-success px-4">@TempData["alertSuccess"]</h3>
+            }
+            @if (TempData["alertError"] != null)
+            {
+                <h3 hidden id="statusError" class="text-danger px-4">@TempData["alertError"]</h3>
+            }
+        </div>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+        @if (Model.Users.Count() > 0)
+        {
+            <table class="table table-bordered">
+                <thead class="bg-primary text-light">
+                    <tr>
+                        <th hidden>Id</th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Is Admin</th>
+                        <th>Is Locked</th>
+                        <th colspan="5">Manage Users</th>
+                        @*<th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td hidden>@user.Id</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            @if (user.IsAdmin)
+                            {
+                                <td>&#10004;</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @*<td>@user.IsAdmin</td>*@
+                            @if (user.IsLocked)
+                            {
+                                <td>&#10004;</td>
+                                <td>
+                                    <a class="btn btn-outline-danger form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="UnlockUser" asp-route-id=@user.Id>Unlock</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td>
+                                    <a class="btn btn-outline-success form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="LockUser" asp-route-id=@user.Id>Lock</a>
+                                </td>
+                            }
+                            @if(user.Roles.Contains("Admin"))
+                            {
+                                <td>
+                                    <a class="btn btn-outline-success form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserAdminRole" asp-route-id=@user.Id>Admin</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="btn btn-outline-danger form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserAdminRole" asp-route-id=@user.Id>Admin</a>
+                                </td>
+                            }
+
+                            @if(user.Roles.Contains("Manager"))
+                            {
+                                <td>
+                                    <a class="btn btn-outline-success form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserManagerRole" asp-route-id=@user.Id>Manager</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="btn btn-outline-danger form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserManagerRole" asp-route-id=@user.Id>Manager</a>
+                                </td>
+                            }
+
+                            @if(user.Roles.Contains("Employee"))
+                            {
+                                <td>
+                                    <a class="btn btn-outline-success form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserEmployeeRole" asp-route-id=@user.Id>Employee</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="btn btn-outline-danger form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserEmployeeRole" asp-route-id=@user.Id>Employee</a>
+                                </td>
+                            }
+
+                            @if (user.Roles.Contains("Customer"))
+                            {
+                                <td>
+                                    <a class="btn btn-outline-success form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserCustomerRole" asp-route-id=@user.Id>Customer</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="btn btn-outline-danger form-control" style="width:100px;" asp-area="Admin" asp-controller="User" asp-action="FlipUserCustomerRole" asp-route-id=@user.Id>Customer</a>
+                                </td>
+                            }
+                        </tr>
+                }
+            </tbody>
+        </table>
+        }
+        </form>
+    </div>
+    <div class="card-footer">
+        <div claclass="row">
+            <div class="col-12">
+                <h6 class="text-success">Be good to your pets!</h6>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="text-center mt-4">
-    <h4>Welcome Message: @Model.WelcomeMessage</h4>
-</div>
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            if (document.body.contains(document.getElementById("statusSuccess"))) {
+                var toastrMessage = document.getElementById("statusSuccess").childNodes[0].nodeValue;
+                toastr.success(toastrMessage);
+            }
+            if (document.body.contains(document.getElementById("statusError"))) {
+                var toastrMessage = document.getElementById("statusError").childNodes[0].nodeValue;
+                toastr.error(toastrMessage);
+            }
+        });
+
+    </script>
+}

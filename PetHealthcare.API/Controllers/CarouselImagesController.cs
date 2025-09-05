@@ -51,6 +51,7 @@ namespace PetHealthcare.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> AddCarouselImage([FromForm] CarouselImageDTO imageDTO)
         {
+            Console.WriteLine($"ADDING CAROUSEL IMAGE...");
             // for image upload to azure blob storage
             if (imageDTO.Image != null)
             {

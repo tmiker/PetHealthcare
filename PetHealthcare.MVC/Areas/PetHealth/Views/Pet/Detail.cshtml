@@ -1,0 +1,151 @@
+﻿@model PetHealthcare.MVC.ViewModels.Pet.PetDetailViewModel
+
+@{
+    ViewData["Title"] = $"Pet Detail";
+}
+<br />
+<div class="card border-primary text-center text-info" style="height:80%;">
+    <div class="card-header border-primary">
+        <div class="row">
+            <div class="col-12">
+                <h3>Details for @Model.Pet!.Name</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <br />
+        <form enctype="multipart/form-data">
+            <div hidden class="row">
+                <div class="col-12 ">
+                    <label asp-for="@Model.Pet.Id"></label>
+                </div>
+                <div class="col-6">
+                    <input inert class="form-control  bg-light" asp-for="@Model.Pet.Id" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Name"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.Name" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Nickname"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.Nickname" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Gender"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.Gender" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Breed"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.Breed" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.DateOfBirth"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.DateOfBirth" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1">
+                            <label asp-for="@Model.Pet.DateOfAdoption"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.DateOfAdoption" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.ChipNumber"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.ChipNumber" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 offset-1 ">
+                            <label asp-for="@Model.Pet.Allergies"></label>
+                        </div>
+                        <div class="col-6">
+                            <input inert class="form-control bg-light" asp-for="@Model.Pet.Allergies" />
+                        </div>
+                    </div>
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <div class="row">
+                            <div class="col-3 offset-1 ">
+                                <label asp-for="@Model.Pet.ImageFileName"></label>
+                            </div>
+                            <div class="col-6">
+                                <input inert class="form-control bg-light" asp-for="@Model.Pet.ImageFileName" />
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-4 offset-5">
+                            <a class="btn btn-outline-info form-control" style="width:180px;" asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            @if (Model.Pet.ImageURL != null)
+                            {
+                                <img src="@Model.Pet.ImageURL" width="380" />
+                            }
+                            else
+                            {
+                                <img src="~/dogicon4.png" width="380" />
+                            }
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-warning">@Model.Pet.Nickname</h5>
+                        </div>
+                    </div>
+
+                    <div class="row py-2">
+                        <div class="col-3 offset-3">
+                            <a class="btn btn-outline-success form-control" style="width:180px;" asp-area="PetHealth" asp-controller="Pet" asp-action="HealthSummary" asp-route-id=" @Model.Pet.Id">Health  Summary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-4 offset-5">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer border-primary" style="height:65px">
+        <h6 class="text-success pt-2">Be good to your pets!</h6>
+    </div>
+</div>

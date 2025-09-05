@@ -47,6 +47,7 @@ builder.Services.AddSingleton<IPetHttpProvider, PetHttpProvider>();
 builder.Services.AddSingleton<IVetHttpProvider, VetHttpProvider>();
 builder.Services.AddSingleton<IVisitHttpProvider, VisitHttpProvider>();
 
+builder.Services.AddScoped<IHealthSummaryService, HealthSummaryService>();
 builder.Services.AddScoped<IClaimsDecoder, ClaimsDecoder>();
 builder.Services.AddScoped<ITokenStatusDecoder, TokenStatusDecoder>();
 

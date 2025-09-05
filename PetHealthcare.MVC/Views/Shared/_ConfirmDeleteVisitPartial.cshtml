@@ -1,0 +1,59 @@
+﻿@model PetHealthcare.MVC.ViewModels.Visit.VisitDeleteViewModel
+@{
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<form asp-area="PetHealth" asp-controller="Visit" asp-action="Delete" asp-route-id="@Model.VisitAggregate!.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="container text-light" style="width:100%">
+        <div class="col-12">
+            <h6 class="text-danger">Are you sure you want to delete this visit?</h6>
+            <hr />
+            <input type="hidden" asp-for="@Model.VisitAggregate!.Id" />
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Date</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.VisitAggregate!.DateOfVisit" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Pet</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.VisitAggregate!.PetName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Doctor</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.VisitAggregate!.Doctor" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-1">
+                    <label>Hospital</label>
+                </div>
+                <div class="col-7">
+                    <input asp-for="@Model.VisitAggregate!.Hospital" class="form-control" />
+                </div>
+            </div>
+            <hr />
+            <div class="form-group row">
+                <div class="col-6 text-center">
+                    <button type="submit" class="btn btn-outline-danger form-conrol" style="width:140px;">Delete</button>
+                </div>
+                <div class="col-6 text-center">
+                    @*<button type="button" id="buttonModalContentCancel" onclick="cancelModalFromContent" class="btn btn-secondary form-conrol" style="width:140px;">Cancel</button>*@
+                    <button type="button" id="buttonModalContentCancel" onclick="$('#visitDeleteConfirmModal').modal('hide');" class="btn btn-outline-info form-conrol" style="width:140px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
