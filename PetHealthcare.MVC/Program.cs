@@ -43,6 +43,9 @@ builder.Services.AddHttpClient(name: StaticDetails.PetHealthcareApi_ClientName, 
 builder.Services.AddSingleton<IAuthenticationHttpProvider, AuthenticationHttpProvider>();
 builder.Services.AddSingleton<IAdminUsersHttpProvider, AdminUsersHttpProvider>();
 builder.Services.AddSingleton<ICarouselImagesHttpProvider, CarouselImagesHttpProvider>();
+builder.Services.AddSingleton<IPetHttpProvider, PetHttpProvider>();
+builder.Services.AddSingleton<IVetHttpProvider, VetHttpProvider>();
+builder.Services.AddSingleton<IVisitHttpProvider, VisitHttpProvider>();
 
 builder.Services.AddScoped<IClaimsDecoder, ClaimsDecoder>();
 builder.Services.AddScoped<ITokenStatusDecoder, TokenStatusDecoder>();
