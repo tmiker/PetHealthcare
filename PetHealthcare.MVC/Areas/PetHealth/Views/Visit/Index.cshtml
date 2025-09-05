@@ -89,10 +89,10 @@
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <td>
-                                <a class="btn btn-outline-info" asp-area="Customer" asp-controller="Visit" asp-action="Detail" asp-route-id=@visit.Id style="width:120px;">Detail</a>
+                                <a class="btn btn-outline-info" asp-area="PetHealth" asp-controller="Visit" asp-action="Detail" asp-route-id=@visit.Id style="width:120px;">Detail</a>
                             </td>
                             <td>
-                                <a class="btn btn-outline-success" asp-area="Customer" asp-controller="Visit" asp-action="Upsert" asp-route-id=@visit.Id style="width:120px;">Edit</a>
+                                    <a class="btn btn-outline-success" asp-area="PetHealth" asp-controller="Visit" asp-action="Upsert" asp-route-id=@visit.Id style="width:120px;">Edit</a>
                             </td>
                             <td>
                                 <button class="buttonModalDelete btn btn-outline-danger" style="width:120px" data-id="@visit.Id" data-toggle="modal">Delete</button>
